@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -25,6 +23,8 @@ public class BirdMover : MonoBehaviour
 
         _maxRotation = Quaternion.Euler(0, 0, _maxRotationZ);
         _minRotation = Quaternion.Euler(0, 0, _minRotationZ);
+
+        ResetBird();
     }
 
     private void Update()
@@ -37,5 +37,12 @@ public class BirdMover : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime);
+    }
+
+    public void ResetBird()
+    {
+        transform.position = _startPosition;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        _rigidbody.velocity = Vector2.zero;
     }
 }
